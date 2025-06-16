@@ -1,0 +1,12 @@
+FROM harisekhon/hbase
+
+COPY ./hbase/entrypoint.sh /entrypoint.sh
+USER root
+RUN chmod +x /entrypoint.sh
+
+COPY ./hbase/init/create_tables.sh /docker-entrypoint-initdb.d/create_tables.sh
+RUN chmod +x /docker-entrypoint-initdb.d/create_tables.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
+
+# CMD ["master"]
